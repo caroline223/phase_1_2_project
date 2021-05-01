@@ -45,3 +45,24 @@ function generateRecipe(recipe) {
     recipeImg.innerHTML = recipe.image
     recipeDiv.appendChild(recipeImg)
 }
+
+function newRecipe(e) {
+    event.preventDefault()
+
+    let recipeData = {
+        name: event.currentTarget[0].value,
+        image: event.currentTarget[1].value,
+        ingredients: event.currentTarget[2].value,
+        description: event.currentTarget[3].value
+    }
+
+    fetch(pageURL, configObj)
+    .then(response => response.json())
+    .then(generateRecipe)
+
+    let configObj = {
+        method: "POST",
+        headers: {'Content-type': 'application/json'},
+        body: JSON.stringify(recipeData)
+    }
+}
