@@ -40,4 +40,8 @@ function generateRecipe(recipe) {
     recipeDiv.appendChild(recipeDes)
 
     //generating the recipe's image (if applicable)
+
+    recipeImg = document.createElement('img')
+    recipeImg.innerHTML = recipe.image
+    recipeDiv.appendChild(recipeImg)
 }
