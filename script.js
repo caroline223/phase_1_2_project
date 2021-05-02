@@ -20,6 +20,8 @@ function getAllDrinks(){
 function generateDrink(drink) {
     let drinkDiv = document.createElement('div')
     document.querySelector('#drink-container').appendChild(drinkDiv)
+    drinkDiv.id = `drink-${drink.id}`
+    drinkDiv.classList.add("drink-div")
 
 
     //generating the drink's name
