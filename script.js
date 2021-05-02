@@ -1,55 +1,55 @@
 let pageNum = 1;
-let pageURL = `http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=${pageNum }`;
+let pageURL = ``;
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    getAllRecipes();
-    document.querySelector(".create-recipe-form").addEventListener("submit", newRecipe)
+    getAllDrinks();
+    document.querySelector(".create-drink-form").addEventListener("submit", newDrink)
     document.querySelector("#forward").addEventListener("click", nextPage)
     document.querySelector("#back").addEventListener("click", previousPage)
 })
 
-function getAllRecipes(){
+function getAllDrinks(){
     fetch(pageURL)
     .then(response => response.json())
-    .then(recipeArr => {
-        recipeArr.forEach(generateRecipe)
+    .then(drinkArr => {
+        drinkArr.forEach(generateDrink)
     })
 }
 
-function generateRecipe(recipe) {
-    let recipeDiv = document.createElement('div')
-    document.querySelector('#recipe-container').appendChild(recipeDiv)
+function generateDrink(drink) {
+    let drinkDiv = document.createElement('div')
+    document.querySelector('#drink-container').appendChild(drinkDiv)
 
 
-    //generating the recipe's name
-    recipeName = document.createElement('h3')
-    recipeName.innerText = recipe.name 
-    recipeDiv.appendChild(recipeName)
+    //generating the drink's name
+    drinkName = document.createElement('h3')
+    drinkName.innerText = drink.name 
+    drinkDiv.appendChild(drinkName)
 
 
-    //generating the recipe's ingredients
-    recipeIngredients = document.createElement('p')
-    recipeIngredients.innerText = recipe.ingredients 
-    recipeDiv.appendChild(recipeIngredients)
+    //generating the drink's ingredients
+    drinkIngredients = document.createElement('p')
+    drinkIngredients.innerText = drink.ingredients 
+    drinkDiv.appendChild(drinkIngredients)
 
-    //generating the recipe's description
+    //generating the drink's description
 
-    recipeDes = document.createElement('p')
-    recipeDes.innerText = recipe.description 
-    recipeDiv.appendChild(recipeDes)
+    drinkDes = document.createElement('p')
+    drinkDes.innerText = drink.description 
+    drinkDiv.appendChild(drinkDes)
 
-    //generating the recipe's image (if applicable)
+    //generating the drink's image (if applicable)
 
-    recipeImg = document.createElement('img')
-    recipeImg.innerHTML = recipe.image
-    recipeDiv.appendChild(recipeImg)
+    drinkImg = document.createElement('img')
+    drinkImg.innerHTML = drink.image
+    drinkDiv.appendChild(drinkImg)
 }
 
-function newRecipe(e) {
+function newDrink(e) {
     event.preventDefault()
 
-    let recipeData = {
+    let drinkData = {
         name: event.currentTarget[0].value,
         image: event.currentTarget[1].value,
         ingredients: event.currentTarget[2].value,
@@ -58,11 +58,29 @@ function newRecipe(e) {
 
     fetch(pageURL, configObj)
     .then(response => response.json())
-    .then(generateRecipe)
+    .then(generateDrink)
 
     let configObj = {
         method: "POST",
         headers: {'Content-type': 'application/json'},
-        body: JSON.stringify(recipeData)
+        body: JSON.stringify(drinkData)
+    }
+
+    function previousPage(e) {
+        fetch(``)
+        .then(response => response.json())
+        .then(drinkArr => {
+            document.querySelector('#drink-container').innerHTML=""
+            drinkArr.forEach(generateDrink)
+        })
+    }
+
+    function nextPage(e) {
+        fetch(``)
+        .then(response => response.json())
+        .then(drinkArr => {
+            document.querySelector('#drink-container').innerHTML=""
+            drinkArr.forEach(generateDrink)
+        })
     }
 }
