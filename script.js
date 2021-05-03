@@ -1,5 +1,5 @@
 let pageNum = 1;
-let pageURL = ``;
+let pageURL = `https://api.punkapi.com/v2/beers?page=${pageNum}&per_page=10`
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -13,6 +13,7 @@ function getAllDrinks(){
     fetch(pageURL)
     .then(response => response.json())
     .then(drinkArr => {
+        console.log(drinkArr)
         drinkArr.forEach(generateDrink)
     })
 }
@@ -23,17 +24,29 @@ function generateDrink(drink) {
     drinkDiv.id = `drink-${drink.id}`
     drinkDiv.classList.add("drink-div")
 
-
     //generating the drink's name
     drinkName = document.createElement('h3')
     drinkName.innerText = drink.name 
     drinkDiv.appendChild(drinkName)
 
+    //generating the drink's image (if applicable)
 
-    //generating the drink's ingredients
-    drinkIngredients = document.createElement('p')
-    drinkIngredients.innerText = drink.ingredients 
-    drinkDiv.appendChild(drinkIngredients)
+    drinkImg = document.createElement('img')
+    drinkImg.src = drink.image_url
+    drinkDiv.appendChild(drinkImg)
+
+
+    //generating the drink's tag line
+
+    drinkTag = document.createElement('p')
+    drinkTag.innerText = drink.tagline
+    drinkDiv.appendChild(drinkTag)
+
+    //generating the date the drink was brewed
+
+    drinkDate = document.createElement('p')
+    drinkDate.innerText = drink.first_brewed
+    drinkDiv.appendChild(drinkDate)
 
     //generating the drink's description
 
@@ -41,21 +54,23 @@ function generateDrink(drink) {
     drinkDes.innerText = drink.description 
     drinkDiv.appendChild(drinkDes)
 
-    //generating the drink's image (if applicable)
-
-    drinkImg = document.createElement('img')
-    drinkImg.innerHTML = drink.image
-    drinkDiv.appendChild(drinkImg)
+    //generating the drink's ingredients
+    /*drinkIngredients = document.createElement('p')
+    drinkIngredients.innerText = drink.ingredients 
+    drinkDiv.appendChild(drinkIngredients)
+    */
+    
 }
 
-function newDrink(e) {
+function newDrink(event) {
     event.preventDefault()
-
     let drinkData = {
         name: event.currentTarget[0].value,
         image: event.currentTarget[1].value,
-        ingredients: event.currentTarget[2].value,
-        description: event.currentTarget[3].value
+        date: event.currentTarget[2].value,
+        ingredients: event.currentTarget[3].value,
+        tagline: event.currentTarget[4].value,
+        description: event.currentTarget[5].value
     }
 
     fetch(pageURL, configObj)
@@ -67,22 +82,22 @@ function newDrink(e) {
         headers: {'Content-type': 'application/json'},
         body: JSON.stringify(drinkData)
     }
+}
 
-    function previousPage(e) {
-        fetch(``)
-        .then(response => response.json())
-        .then(drinkArr => {
-            document.querySelector('#drink-container').innerHTML=""
-            drinkArr.forEach(generateDrink)
-        })
-    }
+function previousPage(e) {
+    fetch(`https://api.punkapi.com/v2/beers?page=${pageNum-=1}&per_page=10`)
+    .then(response => response.json())
+    .then(drinkArr => {
+        document.querySelector('#drink-container').innerHTML=""
+        drinkArr.forEach(generateDrink)
+    })
+}
 
-    function nextPage(e) {
-        fetch(``)
-        .then(response => response.json())
-        .then(drinkArr => {
-            document.querySelector('#drink-container').innerHTML=""
-            drinkArr.forEach(generateDrink)
-        })
-    }
+function nextPage(e) {
+    fetch(`https://api.punkapi.com/v2/beers?page=${pageNum+=1}&per_page=10`)
+    .then(response => response.json())
+    .then(drinkArr => {
+        document.querySelector('#drink-container').innerHTML=""
+        drinkArr.forEach(generateDrink)
+    })
 }
