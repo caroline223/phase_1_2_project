@@ -4,7 +4,7 @@ let pageURL = `https://api.punkapi.com/v2/beers?page=${pageNum}&per_page=10`
 
 document.addEventListener("DOMContentLoaded", function() {
     getAllDrinks();
-    document.querySelector(".create-drink-form").addEventListener("submit", newDrink)
+    document.querySelector("#search-drink-form-by-name").addEventListener("submit", newDrink)
     document.querySelector("#forward").addEventListener("click", nextPage)
     document.querySelector("#back").addEventListener("click", previousPage)
 })
@@ -66,11 +66,10 @@ function newDrink(event) {
     event.preventDefault()
     let drinkData = {
         name: event.currentTarget[0].value,
-        image: event.currentTarget[1].value,
-        date: event.currentTarget[2].value,
-        ingredients: event.currentTarget[3].value,
-        tagline: event.currentTarget[4].value,
-        description: event.currentTarget[5].value
+        image_url: event.currentTarget[1].value,
+        first_brewed: event.currentTarget[2].value,
+        tagline: event.currentTarget[3].value,
+        description: event.currentTarget[4].value
     }
 
     fetch(pageURL, configObj)
@@ -83,6 +82,7 @@ function newDrink(event) {
         body: JSON.stringify(drinkData)
     }
 }
+
 
 function previousPage(e) {
     fetch(`https://api.punkapi.com/v2/beers?page=${pageNum-=1}&per_page=10`)
