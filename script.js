@@ -4,7 +4,7 @@ let pageURL = `https://api.punkapi.com/v2/beers?page=${pageNum }&per_page=20`
 
 document.addEventListener("DOMContentLoaded", function() {
     getAllDrinks();
-    //document.querySelector("#search-drink-form-by-name").addEventListener("submit", newDrink)
+    document.querySelector("#search-drink-random").addEventListener("submit", randomDrink)
     document.querySelector("#forward").addEventListener("click", nextPage)
     document.querySelector("#back").addEventListener("click", previousPage)
 })
@@ -22,37 +22,38 @@ function generateDrink(drink) {
     let drinkDiv = document.createElement('div')
     document.querySelector('#drink-container').appendChild(drinkDiv)
     
-
-    //generating the drink's name
+     //drink's name
     drinkName = document.createElement('h3')
     drinkName.innerText = drink.name 
     drinkDiv.appendChild(drinkName)
 
-    //generating the drink's image (if applicable)
-
+    //drink's image
     drinkImg = document.createElement('img')
     drinkImg.src = drink.image_url
+    drinkImg.width = 300
+    drinkImg.height = 500
     drinkDiv.appendChild(drinkImg)
 
-
-    //generating the drink's tag line
-
+    //drink's tag line
     drinkTag = document.createElement('p')
     drinkTag.innerText = drink.tagline
     drinkDiv.appendChild(drinkTag)
 
-    //generating the date the drink was brewed
-
+    //date the drink was brewed
     drinkDate = document.createElement('p')
     drinkDate.innerText = drink.first_brewed
     drinkDiv.appendChild(drinkDate)
 
-    //generating the drink's description
-
+    //drink's description
     drinkDes = document.createElement('p')
     drinkDes.innerText = drink.description 
     drinkDiv.appendChild(drinkDes)
-    
+}
+
+function randomDrink(){ 
+    fetch("https://api.punkapi.com/v2/beers/random")
+    .then(response => response.json())
+    .then(generateDrink)
 }
 
 /*function newDrink(event) {
