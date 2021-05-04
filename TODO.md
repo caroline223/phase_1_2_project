@@ -13,20 +13,7 @@ MVP
 
 
 
-<!--<div id='create-drink'>
-            <h2>Search For A Beer</h2>
-            <form id='search-drink-form-by-name'>
-                <h3>Search by name:</h3>
-                <input type="text" name="name" placeholder="Name">
-                <input type="submit" value="Search">
-            </form>
 
-            <form id='search-drink-form-by-random'>
-                <h3>Click below to find out the drink of the day!</h3>
-                <input type="submit" value="Search">
-            </form>
-        </div>
-    -->
 
 
     
