@@ -1,17 +1,16 @@
-As a user, I want to see a list of recipes suitable for any breed of dog
-
-As a user, I wanto to see a list of recipes based on a particular ingredient for any breed of dog
+As a user, I want to see a list of drinks that are most popular 
+As a user, I want to to see a list of beers based on a search parameter by name 
+As a user, I want to see a random drink appear as the featured drink of the day
 
 As a user, I want to click a reset button to undo the filter or clear the search bar when searching for ingredients 
 
 MVP
-- DOMContentLoaded event listener that will make a fetch request on recipies for a given breed of dog, including name, ingredients, and image
+- DOMContentLoaded event listener that will make a fetch request on different beers, including name, description, date brewed, tagline and image
 
--dropdown with change eventlistener that will rerender the list of recipies based on the letter chosen (recipies should be placed in alphabetical order)
+-dropdown with change eventlistener that will rerender the list of drinks based on the letter chosen (recipies should be placed in alphabetical order)
 
 -searchbar with change event listener that will render the recipies based on a given ingredient input 
 
--reset button with click listener that will revert back to an empty search list 
 
 
 <!--<div id='create-drink'>
