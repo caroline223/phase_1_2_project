@@ -4,7 +4,7 @@ let pageURL = `https://api.punkapi.com/v2/beers?page=${pageNum}&per_page=20`;
 
 document.addEventListener("DOMContentLoaded", function() {
     getAllDrinks();
-    //document.querySelector("#search-drink-random").addEventListener("submit", randomDrink)
+    document.querySelector("#random-drink-button").addEventListener("click", randomDrink)
     document.querySelector("#forward").addEventListener("click", nextPage)
     document.querySelector("#back").addEventListener("click", previousPage)
 })
@@ -15,6 +15,10 @@ function getAllDrinks(){
     .then(drinkArr => {
         console.log(drinkArr)
         drinkArr.forEach(generateDrink)
+    })
+    .catch(error => {
+        alert("File Not Available");
+        console.log(error.message);
     })
 }
 
@@ -36,25 +40,39 @@ function generateDrink(drink) {
 
     //drink's tag line
     drinkTag = document.createElement('p')
-    drinkTag.innerText = drink.tagline
+    drinkTag.innerText = "Tag Line: " + drink.tagline
     drinkDiv.appendChild(drinkTag)
 
     //date the drink was brewed
     drinkDate = document.createElement('p')
-    drinkDate.innerText = drink.first_brewed
+    drinkDate.innerText =  "Date Brewed: " + drink.first_brewed
     drinkDiv.appendChild(drinkDate)
 
     //drink's description
     drinkDes = document.createElement('p')
-    drinkDes.innerText = drink.description 
+    drinkDes.innerText = "Description: " + drink.description 
     drinkDiv.appendChild(drinkDes)
+
+    //drink's food pairing
+    drinkFood = document.createElement('p')
+    drinkFood.innerText =  "Food Pairing: " + drink.food_pairing
+    drinkDiv.appendChild(drinkFood)
+
+    //drink's brewer's tips
+    drinkBrew = document.createElement('p')
+    drinkBrew.innerText =  "Brewer's Tips: " + drink.brewers_tips
+    drinkDiv.appendChild(drinkBrew)
 }
 
-/*function randomDrink(){ 
-    fetch("https://api.punkapi.com/v2/beers/random")
+function randomDrink(){ 
+    fetch('https://api.punkapi.com/v2/beers/random')
     .then(response => response.json())
-    .then(generateDrink)
-} */
+    .then(drinkArr => {
+        console.log(drinkArr)
+        document.querySelector("#random-drink").innerHTML=""
+        drinkArr.reduce(generateDrink)
+    })
+} 
 
 /*function newDrink(event) {
     event.preventDefault()
