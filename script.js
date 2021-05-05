@@ -33,7 +33,7 @@ function generateDrink(drink) {
 
     //drink's image
     drinkImg = document.createElement('img')
-    drinkImg.src = drink.image_url
+    drinkImg.src = drink.image_url ? drink.image_url : './default_image.png'
     drinkImg.width = 300
     drinkImg.height = 500
     drinkDiv.appendChild(drinkImg)
@@ -70,7 +70,7 @@ function randomDrink(){
     .then(drinkArr => {
         console.log(drinkArr)
         document.querySelector("#random-drink").innerHTML=""
-        drinkArr.reduce(generateDrink)
+        drinkArr.map(generateDrink)
     })
 } 
 
@@ -120,6 +120,7 @@ function nextPage(e) {
     fetch(`https://api.punkapi.com/v2/beers?page=${pageNum+=1}&per_page=20`)
     .then(response => response.json())
     .then(drinkArr => {
+        //place an if-else conditional here
         document.querySelector("#drink-container").innerHTML=""
         drinkArr.forEach(generateDrink)
     })
