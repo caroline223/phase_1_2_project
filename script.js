@@ -1,10 +1,10 @@
 let pageNum = 1;
-let pageURL = `https://api.punkapi.com/v2/beers?page=${pageNum }&per_page=20`
+let pageURL = `https://api.punkapi.com/v2/beers?page=${pageNum}&per_page=20`;
 
 
 document.addEventListener("DOMContentLoaded", function() {
     getAllDrinks();
-    document.querySelector("#search-drink-random").addEventListener("submit", randomDrink)
+    //document.querySelector("#search-drink-random").addEventListener("submit", randomDrink)
     document.querySelector("#forward").addEventListener("click", nextPage)
     document.querySelector("#back").addEventListener("click", previousPage)
 })
@@ -50,11 +50,11 @@ function generateDrink(drink) {
     drinkDiv.appendChild(drinkDes)
 }
 
-function randomDrink(){ 
+/*function randomDrink(){ 
     fetch("https://api.punkapi.com/v2/beers/random")
     .then(response => response.json())
     .then(generateDrink)
-}
+} */
 
 /*function newDrink(event) {
     event.preventDefault()
@@ -65,11 +65,9 @@ function randomDrink(){
         tagline: event.currentTarget[3].value,
         description: event.currentTarget[4].value
     }
-
     fetch(pageURL, configObj)
     .then(response => response.json())
     .then(generateDrink)
-
     let configObj = {
         method: "POST",
         headers: {'Content-type': 'application/json'},
@@ -80,28 +78,31 @@ function randomDrink(){
 
 
 function previousPage(e) {
-    fetch(`https://api.punkapi.com/v2/beers?page=${pageNum-=1}&per_page=20`)
-    .then(response => response.json())
-    .then(drinkArr => {
-        document.querySelector('#drink-container').innerHTML=""
-        drinkArr.forEach(generateDrink)
-    })
 
-    if (pageNum < 1) {
+    if (pageNum <= 1) {
         fetch(`https://api.punkapi.com/v2/beers?page=${pageNum=1}&per_page=20`)
         .then(response => response.json())
         .then(drinkArr => {
-            document.querySelector('#drink-container').innerHTML=""
+            document.querySelector("#drink-container").innerHTML=""
             drinkArr.forEach(generateDrink)
         })  
-    }
+    } 
+    else {
+        fetch(`https://api.punkapi.com/v2/beers?page=${pageNum-=1}&per_page=20`)
+        .then(response => response.json())
+        .then(drinkArr => {
+            document.querySelector("#drink-container").innerHTML=""
+            drinkArr.forEach(generateDrink)
+        })
+   }
+    
 }
 
 function nextPage(e) {
     fetch(`https://api.punkapi.com/v2/beers?page=${pageNum+=1}&per_page=20`)
     .then(response => response.json())
     .then(drinkArr => {
-        document.querySelector('#drink-container').innerHTML=""
+        document.querySelector("#drink-container").innerHTML=""
         drinkArr.forEach(generateDrink)
     })
 }
