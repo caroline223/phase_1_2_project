@@ -1,4 +1,5 @@
 let pageNum = 1;
+let isLastPage = false
 let pageURL = `https://api.punkapi.com/v2/beers?page=${pageNum}&per_page=20`;
 
 
@@ -21,9 +22,13 @@ function getAllDrinks(){
     const forwardButton = document.createElement('button')
         forwardButton.innerHTML="Next" 
         document.querySelector('#drink-button').appendChild(forwardButton)
+    const resetButton = document.createElement('button')
+         resetButton.innerHTML="Reset"
+         document.querySelector("#drink-container").appendChild(resetButton)
    
     backButton.addEventListener("click", previousPage)
     forwardButton.addEventListener("click", nextPage)
+    resetButton.addEventListener("click", resetPage)
 }
 
 function generateDrink(drink) {
@@ -76,6 +81,11 @@ function randomDrink(){
         document.querySelector("#random-drink").innerHTML=""
         randomArr.map(generateRandomDrink)
     })
+    const resetButton = document.createElement('button')
+         resetButton.innerHTML="Reset"
+         document.querySelector("#random-drink").appendChild(resetButton)
+    
+    resetButton.addEventListener("click", resetRandomPage) 
 } 
 
 function generateRandomDrink(random) {
@@ -163,24 +173,27 @@ function previousPage(e) {
 }
 
 function nextPage(e) {
-
-    if (pageNum >= 17) {
-        fetch(`https://api.punkapi.com/v2/beers?page=${pageNum=17}&per_page=20`)
-        .then(response => response.json())
-        .then(drinkArr => {
-            document.querySelector("#drink-container").innerHTML=""
-            drinkArr.forEach(generateDrink)
-        })  
-    } 
-    else {
-        fetch(`https://api.punkapi.com/v2/beers?page=${pageNum+=1}&per_page=20`)
+    console.log(pageNum, isLastPage)
+     if (!isLastPage) {
+         pageNum++
+        fetch(`https://api.punkapi.com/v2/beers?page=${pageNum}&per_page=20`)
         .then(response => response.json())
         .then(drinkArr => {
            document.querySelector("#drink-container").innerHTML=""
-                console.log(drinkArr)
+                if (drinkArr.length < 20) {
+                    isLastPage = true
+                    //see if I could hide the next button on the last page; style.display=hidden
+                }
                 drinkArr.forEach(generateDrink)
-        })   
-    }
-        
+        }) 
+     }      
+}
+
+function resetPage(){
+    document.querySelector("#drink-container").innerHTML=""
+}
+
+function resetRandomPage(){
+    document.querySelector("#random-drink").innerHTML=""
 }
 
