@@ -15,7 +15,6 @@ function getAllDrinks(){
         drinkArr.forEach(generateDrink)
     })
 
-    
     const backButton = document.createElement('button')
         backButton.innerHTML="Previous"
         document.querySelector('#drink-button').appendChild(backButton)
@@ -23,8 +22,8 @@ function getAllDrinks(){
         forwardButton.innerHTML="Next" 
         document.querySelector('#drink-button').appendChild(forwardButton)
    
-        backButton.addEventListener("click", previousPage)
-        forwardButton.addEventListener("click", nextPage)
+    backButton.addEventListener("click", previousPage)
+    forwardButton.addEventListener("click", nextPage)
 }
 
 function generateDrink(drink) {
@@ -164,12 +163,24 @@ function previousPage(e) {
 }
 
 function nextPage(e) {
+
+    if (pageNum >= 17) {
+        fetch(`https://api.punkapi.com/v2/beers?page=${pageNum=17}&per_page=20`)
+        .then(response => response.json())
+        .then(drinkArr => {
+            document.querySelector("#drink-container").innerHTML=""
+            drinkArr.forEach(generateDrink)
+        })  
+    } 
+    else {
         fetch(`https://api.punkapi.com/v2/beers?page=${pageNum+=1}&per_page=20`)
         .then(response => response.json())
         .then(drinkArr => {
-                document.querySelector("#drink-container").innerHTML=""
+           document.querySelector("#drink-container").innerHTML=""
                 console.log(drinkArr)
-                drinkArr.forEach(generateDrink)  
-    })               
+                drinkArr.forEach(generateDrink)
+        })   
+    }
+        
 }
 
