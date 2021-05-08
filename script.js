@@ -6,6 +6,7 @@ let pageURL = `https://api.punkapi.com/v2/beers?page=${pageNum}&per_page=20`;
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#random-drink-button").addEventListener("click", randomDrink)
     document.querySelector("#featured-drink-button").addEventListener("click", getAllDrinks)
+    document.querySelector("#reset-button").addEventListener("click", resetPage)
 })
 
 function getAllDrinks(){
@@ -22,13 +23,12 @@ function getAllDrinks(){
     const forwardButton = document.createElement('button')
         forwardButton.innerHTML="Next" 
         document.querySelector('#drink-button').appendChild(forwardButton)
-    const resetButton = document.createElement('button')
-         resetButton.innerHTML="Reset"
-         document.querySelector("#drink-button").appendChild(resetButton)
-   
+    
     backButton.addEventListener("click", previousPage)
     forwardButton.addEventListener("click", nextPage)
-    resetButton.addEventListener("click", resetPage)
+    
+    document.querySelector("#random-drink-button").style.visibility = "hidden"
+    document.querySelector("#featured-drink-button").style.visibility = "hidden"
 }
 
 function generateDrink(drink) {
@@ -81,12 +81,11 @@ function randomDrink(){
         document.querySelector("#random-drink").innerHTML=""
         randomArr.map(generateRandomDrink)
     })
-    const resetRandomButton = document.createElement('button')
-         resetRandomButton.innerHTML="Reset"
-         document.querySelector("#random-button").appendChild(resetRandomButton)
-    
-    resetRandomButton.addEventListener("click", resetRandomPage) 
+         
+    document.querySelector("#featured-drink-button").style.visibility = "hidden" 
 } 
+
+
 
 function generateRandomDrink(random) {
     let randomDiv = document.createElement('div')
@@ -130,25 +129,7 @@ function generateRandomDrink(random) {
     randomDiv.appendChild(randomBrew)
 }
 
-/*function newDrink(event) {
-    event.preventDefault()
-    let drinkData = {
-        name: event.currentTarget[0].value,
-        image_url: event.currentTarget[1].value,
-        first_brewed: event.currentTarget[2].value,
-        tagline: event.currentTarget[3].value,
-        description: event.currentTarget[4].value
-    }
-    fetch(pageURL, configObj)
-    .then(response => response.json())
-    .then(generateDrink)
-    let configObj = {
-        method: "POST",
-        headers: {'Content-type': 'application/json'},
-        body: JSON.stringify(drinkData)
-    }
-}
-*/
+
 
 
 function previousPage(e) {
@@ -191,11 +172,9 @@ function nextPage(e) {
 
 function resetPage(){
     document.querySelector("#drink-container").innerHTML=""
-    window.location.reload()
-}
-
-function resetRandomPage(){
     document.querySelector("#random-drink").innerHTML=""
     window.location.reload()
 }
+
+
 

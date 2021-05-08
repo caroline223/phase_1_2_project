@@ -14,3 +14,22 @@ MVP
 
 
 
+/*function newDrink(event) {
+    event.preventDefault()
+    let drinkData = {
+        name: event.currentTarget[0].value,
+        image_url: event.currentTarget[1].value,
+        first_brewed: event.currentTarget[2].value,
+        tagline: event.currentTarget[3].value,
+        description: event.currentTarget[4].value
+    }
+    fetch(pageURL, configObj)
+    .then(response => response.json())
+    .then(generateDrink)
+    let configObj = {
+        method: "POST",
+        headers: {'Content-type': 'application/json'},
+        body: JSON.stringify(drinkData)
+    }
+}
+*/
