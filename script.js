@@ -1,6 +1,10 @@
-let pageNum = 1;
+let pageNum = 1
 let isLastPage = false
 let pageURL = `https://api.punkapi.com/v2/beers?page=${pageNum}&per_page=20`;
+
+const backButton = document.createElement('button')
+const forwardButton = document.createElement('button')
+
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -16,11 +20,11 @@ function getAllDrinks(){
         console.log(drinkArr)
         drinkArr.forEach(generateDrink)
     })
-
-    const backButton = document.createElement('button')
-        backButton.innerHTML="Previous"
-        document.querySelector('#drink-button').appendChild(backButton)
-    const forwardButton = document.createElement('button')
+   
+         backButton.innerHTML="Previous"
+         document.querySelector('#drink-button').appendChild(backButton)
+    
+    
         forwardButton.innerHTML="Next" 
         document.querySelector('#drink-button').appendChild(forwardButton)
     
@@ -29,6 +33,8 @@ function getAllDrinks(){
     
     document.querySelector("#random-drink-button").style.visibility = "hidden"
     document.querySelector("#featured-drink-button").style.visibility = "hidden"
+    backButton.style.visibility = "hidden"
+    
 }
 
 function generateDrink(drink) {
@@ -133,7 +139,6 @@ function generateRandomDrink(random) {
 
 
 function previousPage(e) {
-
     if (pageNum <= 1) {
         fetch(`https://api.punkapi.com/v2/beers?page=${pageNum=1}&per_page=20`)
         .then(response => response.json())
@@ -141,6 +146,7 @@ function previousPage(e) {
             document.querySelector("#drink-container").innerHTML=""
             drinkArr.forEach(generateDrink)
         })  
+        backButton.style.visibility = "hidden"
     } 
     else {
         fetch(`https://api.punkapi.com/v2/beers?page=${pageNum-=1}&per_page=20`)
@@ -149,6 +155,7 @@ function previousPage(e) {
             document.querySelector("#drink-container").innerHTML=""
             drinkArr.forEach(generateDrink)
         })
+        forwardButton.style.visibility = "visible"  
    }
     
 }
@@ -163,11 +170,12 @@ function nextPage(e) {
            document.querySelector("#drink-container").innerHTML=""
                 if (drinkArr.length < 20) {
                     isLastPage = true
-                    //see if I could hide the next button on the last page; style.display=hidden
+                    forwardButton.style.visibility = "hidden"
                 }
                 drinkArr.forEach(generateDrink)
         }) 
-     }      
+     } 
+     backButton.style.visibility = "visible"     
 }
 
 function resetPage(){
