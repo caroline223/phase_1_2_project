@@ -24,7 +24,7 @@ function getAllDrinks(){
         document.querySelector('#drink-button').appendChild(forwardButton)
     const resetButton = document.createElement('button')
          resetButton.innerHTML="Reset"
-         document.querySelector("#drink-container").appendChild(resetButton)
+         document.querySelector("#drink-button").appendChild(resetButton)
    
     backButton.addEventListener("click", previousPage)
     forwardButton.addEventListener("click", nextPage)
@@ -81,11 +81,11 @@ function randomDrink(){
         document.querySelector("#random-drink").innerHTML=""
         randomArr.map(generateRandomDrink)
     })
-    const resetButton = document.createElement('button')
-         resetButton.innerHTML="Reset"
-         document.querySelector("#random-drink").appendChild(resetButton)
+    const resetRandomButton = document.createElement('button')
+         resetRandomButton.innerHTML="Reset"
+         document.querySelector("#random-button").appendChild(resetRandomButton)
     
-    resetButton.addEventListener("click", resetRandomPage) 
+    resetRandomButton.addEventListener("click", resetRandomPage) 
 } 
 
 function generateRandomDrink(random) {
@@ -191,9 +191,11 @@ function nextPage(e) {
 
 function resetPage(){
     document.querySelector("#drink-container").innerHTML=""
+    window.location.reload()
 }
 
 function resetRandomPage(){
     document.querySelector("#random-drink").innerHTML=""
+    window.location.reload()
 }
 
