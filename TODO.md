@@ -7,29 +7,9 @@ As a user, I want to click a reset button to undo the filter or clear the search
 MVP
 - DOMContentLoaded event listener that will make a fetch request on different beers, including name, description, date brewed, tagline and image
 
--dropdown with change eventlistener that will rerender the list of drinks based on the letter chosen (recipies should be placed in alphabetical order)
-
--searchbar with change event listener that will render the recipies based on a given ingredient input 
+-searchbar with change event listener that will render the beers based on a given name 
 
 
 
 
-/*function newDrink(event) {
-    event.preventDefault()
-    let drinkData = {
-        name: event.currentTarget[0].value,
-        image_url: event.currentTarget[1].value,
-        first_brewed: event.currentTarget[2].value,
-        tagline: event.currentTarget[3].value,
-        description: event.currentTarget[4].value
-    }
-    fetch(pageURL, configObj)
-    .then(response => response.json())
-    .then(generateDrink)
-    let configObj = {
-        method: "POST",
-        headers: {'Content-type': 'application/json'},
-        body: JSON.stringify(drinkData)
-    }
-}
-*/
+
