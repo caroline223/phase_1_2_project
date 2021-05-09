@@ -2,7 +2,7 @@ Bottom's Up!
 
 Bottom's Up is a webpafe that allows you to explore and learn about some of your favorite well-known beers as well as some that you may not have heard of before.
 
-![image]("https://user-images.githubusercontent.com/67647836/117558880-c260e600-b04e-11eb-9ad7-3acffc174b9b.png" height ="250" width="250")
+![image height="250" width="250"](https://user-images.githubusercontent.com/67647836/117558880-c260e600-b04e-11eb-9ad7-3acffc174b9b.png)
 
 
 Bottom's Up lists names of beers including their description, date first brewed, and best foods to pair the drinks with. You can learn more about the many different types of beers right here by copy/paste the link in your browser!
