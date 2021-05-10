@@ -39,6 +39,10 @@ function filterDrinks(letter) {
     
     document.getElementById('target_div_2').style.visibility = "hidden" 
     document.getElementById('target_div_3').style.visibility = "hidden" 
+
+    resetButton.innerHTML="Reset"
+    document.querySelector('#drink-button').appendChild(resetButton)
+    resetButton.addEventListener("click", resetPage)
 }
 
 function generateDrinkFilter() {
