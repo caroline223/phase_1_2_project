@@ -275,6 +275,7 @@ function nextPage(e) {
 function resetPage(){
     document.querySelector("#drink-container").innerHTML=""
     document.querySelector("#random-container").innerHTML=""
+    document.querySelector("#filter-container").innerHTML=""
     window.location.reload()
 }
 
