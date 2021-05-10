@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: auto auto auto auto;
   grid-template-rows: 600px;
-  grid-gap: 10px;
+  grid-gap: 5px;
   padding: 10px;
       
 }
@@ -10,4 +10,18 @@
 #drink-container > div {
     text-align: center;
     font-size: 12px;
+}
+
+#random-drink-button{
+    padding: 5px;
+}
+
+#featured-drink-button{
+    padding: 5px;
+}
+
+#random-container{
+    display:grid;
+    grid-template: auto;
+    padding:5px;
 }
