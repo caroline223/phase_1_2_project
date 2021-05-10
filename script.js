@@ -60,8 +60,8 @@ function generateDrinkFilter() {
         //drink's image
         searchImg = document.createElement('img')
         searchImg.src = search.image_url ? search.image_url : './default_image.png'
-        searchImg.width = 300
-        searchImg.height = 500
+        searchImg.width = 200
+        searchImg.height = 200
         searchDiv.appendChild(searchImg)
 
         //drink's tag line
@@ -136,8 +136,8 @@ function generateDrink(drink) {
     //drink's image
     drinkImg = document.createElement('img')
     drinkImg.src = drink.image_url ? drink.image_url : './default_image.png'
-    drinkImg.width = 300
-    drinkImg.height = 500
+    drinkImg.width = 200
+    drinkImg.height = 200
     drinkDiv.appendChild(drinkImg)
 
     //drink's tag line
@@ -199,8 +199,8 @@ function generateRandomDrink(random) {
     //drink's image
     randomImg = document.createElement('img')
     randomImg.src = random.image_url ? random.image_url : './default_image.png'
-    randomImg.width = 300
-    randomImg.height = 500
+    randomImg.width = 200
+    randomImg.height = 200
     randomDiv.appendChild(randomImg)
 
     //drink's tag line
