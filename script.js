@@ -86,7 +86,7 @@ function generateDrink(drink) {
     drinkImg = document.createElement('img')
     drinkImg.src = drink.image_url ? drink.image_url : './default_image.png'
     drinkImg.width = 200
-    drinkImg.height = 200
+    drinkImg.height = 400
     drinkDiv.appendChild(drinkImg)
 
     //drink's tag line
@@ -156,7 +156,7 @@ function generateRandomDrink(random) {
     randomImg = document.createElement('img')
     randomImg.src = random.image_url ? random.image_url : './default_image.png'
     randomImg.width = 200
-    randomImg.height = 200
+    randomImg.height = 400
     randomDiv.appendChild(randomImg)
 
     //drink's tag line
