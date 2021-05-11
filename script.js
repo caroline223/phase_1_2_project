@@ -2,7 +2,8 @@ let pageNum = 1
 let isLastPage = false
 let pageURL = `https://api.punkapi.com/v2/beers?page=${pageNum}&per_page=20`;
 let newDrinkArr = []
-let beerName = "_"
+let allDrinks = []
+
 
 
 const backButton = document.createElement('button')
@@ -15,89 +16,38 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#random-drink-button").addEventListener('click', randomDrink)
     document.querySelector("#featured-drink-button").addEventListener('click', getAllDrinks)
     document.querySelector("#drink-dropdown").addEventListener('change', function(event) {
-        filterDrinks(event.target.value)
+        allDrinks.filter(generateDrink.clear)
+        allDrinks.forEach(generateDrink)
     }) 
     
     document.getElementById('target_div_1').innerHTML += 'Filter Drinks That Begin With:'
-    document.getElementById('target_div_2').innerHTML += 'OR:'
-    document.getElementById('target_div_3').innerHTML += 'Click below to learn about our featured drinks or a surprise drink!'
+        document.getElementById('target_div_1').style.color = 'yellow'
     
+    document.getElementById('target_div_2').innerHTML += 'OR:'
+        document.getElementById('target_div_2').style.color = 'yellow'
+    document.getElementById('target_div_3').innerHTML += 'Click below to learn about our featured drinks or a surprise drink!'
+        document.getElementById('target_div_3').style.color = 'yellow'
 })
 
-function filterDrinks(letter) {
-    fetch(`https://api.punkapi.com/v2/beers?beer_name=${beerName}`)
-    .then(response => response.json())
-    .then(newDrinkArr => {
-        console.log(newDrinkArr)
-        document.querySelector("#filter-container").innerHTML=""
-        generateDrinkFilter
-    })
-
-    document.querySelector("#random-drink-button").style.visibility = "hidden"
-    document.querySelector("#featured-drink-button").style.visibility = "hidden"
-
+function filterDrinks() {
     
-    document.getElementById('target_div_2').style.visibility = "hidden" 
-    document.getElementById('target_div_3').style.visibility = "hidden" 
-
-    resetButton.innerHTML="Reset"
-    document.querySelector('#drink-button').appendChild(resetButton)
-    resetButton.addEventListener("click", resetPage)
 }
 
 function generateDrinkFilter() {
-
-    let searchDiv = document.createElement('div')
-    document.querySelector('#filter-drinks').appendChild(searchDiv)
-
-    let filter = newDrinkArr.filter(search => search.startsWith(letter))
-    filter.forEach(search => {
-        //drink's name
-        searchName = document.createElement('h3')
-        searchName.innerText = search.name 
-        searchDiv.appendChild(searchName)
-
-        //drink's image
-        searchImg = document.createElement('img')
-        searchImg.src = search.image_url ? search.image_url : './default_image.png'
-        searchImg.width = 200
-        searchImg.height = 200
-        searchDiv.appendChild(searchImg)
-
-        //drink's tag line
-        searchTag = document.createElement('p')
-        searchTag.innerText = "Tag Line: " + search.tagline
-        searchDiv.appendChild(searchTag)
-
-        //date the drink was brewed
-        searchDate = document.createElement('p')
-        searchDate.innerText =  "Date Brewed: " + search.first_brewed
-        searchDiv.appendChild(searchDate)
-
-        //drink's description
-        searchDes = document.createElement('p')
-        searchDes.innerText = "Description: " + search.description 
-        searchDiv.appendChild(searchDes)
-
-        //drink's food pairing
-        searchFood = document.createElement('p')
-        searchFood.innerText =  "Food Pairing: " + search.food_pairing
-        searchDiv.appendChild(searchFood)
-
-        //drink's brewer's tips
-        searchBrew = document.createElement('p')
-        searchBrew.innerText =  "Brewer's Tips: " + search.brewers_tips
-        searchDiv.appendChild(searchBrew)
-     })         
+    
 }
 
 function getAllDrinks(){
     fetch(pageURL)
     .then(response => response.json())
     .then(drinkArr => {
-        console.log(drinkArr)
+        allDrinks = drinkArr
         drinkArr.forEach(generateDrink)
     })
+
+    document.body.style.backgroundImage = "url('background_image.jpeg')"
+    document.body.style.backgroundSize = "1430px"
+    document.body.style.backgroundRepeat = "repeat"
    
     backButton.innerHTML="Previous"
     document.querySelector('#drink-button').appendChild(backButton)
@@ -117,7 +67,6 @@ function getAllDrinks(){
     document.querySelector("#featured-drink-button").style.visibility = "hidden"
     backButton.style.visibility = "hidden"
 
-    
     document.getElementById('target_div_2').style.visibility = "hidden" 
     document.getElementById('target_div_3').style.visibility = "hidden" 
     
@@ -178,6 +127,13 @@ function randomDrink(){
     document.getElementById('target_div_2').style.visibility = "hidden" 
     document.getElementById('target_div_3').style.visibility = "hidden" 
 
+    document.body.style.backgroundImage = "url('Screen Shot 2021-05-10 at 10.39.15 PM.png')"
+    document.body.style.backgroundSize = "100% 100%"
+    
+    document.body.style.backgroundImage = "url('background_image.jpeg')"
+    document.body.style.backgroundSize = "1430px"
+    document.body.style.backgroundRepeat = "repeat"
+    
     resetButton.innerHTML="Reset"
     document.querySelector('#drink-button').appendChild(resetButton)
 
