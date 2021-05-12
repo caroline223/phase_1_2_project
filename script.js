@@ -16,26 +16,32 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#random-drink-button").addEventListener('click', randomDrink)
     document.querySelector("#featured-drink-button").addEventListener('click', getAllDrinks)
     document.querySelector("#drink-dropdown").addEventListener('change', function(event) {
-        allDrinks.filter(generateDrink.clear)
-        allDrinks.forEach(generateDrink)
+     //get the value selected using the event object
+     let letter = event.target.value
+     //filter the allDrinks array using the selected value -  drink.name.startsWith(letter)
+     const filteredDrinks = allDrinks.filter((drink) => {
+        return drink.name.startsWith(letter)
+     })
+     // clear drink container of previous drinks
+     document.querySelector('#drink-container').innerHTML = ""
+     //iterate over new filtered array, calling generateDrink with each drink element
+     filteredDrinks.forEach(generateDrink)
     }) 
     
     document.getElementById('target_div_1').innerHTML += 'Filter Drinks That Begin With:'
         document.getElementById('target_div_1').style.color = 'yellow'
+        document.getElementById('target_div_1').style.fontSize = '22px'
     
     document.getElementById('target_div_2').innerHTML += 'OR:'
         document.getElementById('target_div_2').style.color = 'yellow'
+        document.getElementById('target_div_2').style.fontSize = '22px'
+
     document.getElementById('target_div_3').innerHTML += 'Click below to learn about our featured drinks or a surprise drink!'
         document.getElementById('target_div_3').style.color = 'yellow'
+        document.getElementById('target_div_3').style.fontSize = '22px'
+        document.getElementById('target_div_1').style.fontWeight = '22px'
 })
 
-function filterDrinks() {
-    
-}
-
-function generateDrinkFilter() {
-    
-}
 
 function getAllDrinks(){
     fetch(pageURL)
@@ -120,16 +126,14 @@ function randomDrink(){
     .then(response => response.json())
     .then(randomArr => {
         console.log(randomArr)
-        document.querySelector("#random-container").innerHTML=""
+        document.querySelector('#drink-container').innerHTML = ""
+        generateDrink(randomArr[0])
         randomArr.map(generateRandomDrink)
     })    
     document.querySelector("#featured-drink-button").style.visibility = "hidden" 
     document.getElementById('target_div_2').style.visibility = "hidden" 
     document.getElementById('target_div_3').style.visibility = "hidden" 
 
-    document.body.style.backgroundImage = "url('Screen Shot 2021-05-10 at 10.39.15 PM.png')"
-    document.body.style.backgroundSize = "100% 100%"
-    
     document.body.style.backgroundImage = "url('background_image.jpeg')"
     document.body.style.backgroundSize = "1430px"
     document.body.style.backgroundRepeat = "repeat"
@@ -137,52 +141,13 @@ function randomDrink(){
     resetButton.innerHTML="Reset"
     document.querySelector('#drink-button').appendChild(resetButton)
 
-     resetButton.addEventListener("click", resetPage)
+    resetButton.addEventListener("click", resetPage)
 
 } 
-
-
 
 function generateRandomDrink(random) {
     let randomDiv = document.createElement('div')
     document.querySelector('#random-container').appendChild(randomDiv)
-
-    //drink's name
-    randomName = document.createElement('h3')
-    randomName.innerText = random.name 
-    randomDiv.appendChild(randomName)
-
-    //drink's image
-    randomImg = document.createElement('img')
-    randomImg.src = random.image_url ? random.image_url : './default_image.png'
-    randomImg.width = 200
-    randomImg.height = 400
-    randomDiv.appendChild(randomImg)
-
-    //drink's tag line
-    randomTag = document.createElement('p')
-    randomTag.innerText = "Tag Line: " + random.tagline
-    randomDiv.appendChild(randomTag)
-
-    //date the drink was brewed
-    randomDate = document.createElement('p')
-    randomDate.innerText =  "Date Brewed: " + random.first_brewed
-    randomDiv.appendChild(randomDate)
-
-    //drink's description
-    randomDes = document.createElement('p')
-    randomDes.innerText = "Description: " + random.description 
-    randomDiv.appendChild(randomDes)
-
-    //drink's food pairing
-    randomFood = document.createElement('p')
-    randomFood.innerText =  "Food Pairing: " + random.food_pairing
-    randomDiv.appendChild(randomFood)
-
-    //drink's brewer's tips
-    randomBrew = document.createElement('p')
-    randomBrew.innerText =  "Brewer's Tips: " + random.brewers_tips
-    randomDiv.appendChild(randomBrew)
 }
 
 
@@ -206,8 +171,7 @@ function previousPage(e) {
             drinkArr.forEach(generateDrink)
         })
         forwardButton.style.visibility = "visible"  
-   }
-    
+   }  
 }
 
 function nextPage(e) {
@@ -228,11 +192,8 @@ function nextPage(e) {
      backButton.style.visibility = "visible"     
 }
 
-function resetPage(){
-    document.querySelector("#drink-container").innerHTML=""
-    document.querySelector("#random-container").innerHTML=""
-    document.querySelector("#filter-container").innerHTML=""
-    window.location.reload()
+function resetPage(){ 
+   window.location.reload() 
 }
 
 
