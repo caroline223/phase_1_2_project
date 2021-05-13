@@ -1,46 +1,36 @@
 let pageNum = 1
 let isLastPage = false
 let pageURL = `https://api.punkapi.com/v2/beers?page=${pageNum}&per_page=20`;
-let newDrinkArr = []
 let allDrinks = []
-
-
 
 const backButton = document.createElement('button')
 const forwardButton = document.createElement('button')
-const resetButton = document.createElement('button')
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelector("#random-drink-button").addEventListener('click', randomDrink)
-    document.querySelector("#featured-drink-button").addEventListener('click', getAllDrinks)
-    document.querySelector("#drink-dropdown").addEventListener('change', function(event) {
-     //get the value selected using the event object
-     let letter = event.target.value
-     //filter the allDrinks array using the selected value -  drink.name.startsWith(letter)
-     const filteredDrinks = allDrinks.filter((drink) => {
-        return drink.name.startsWith(letter)
-     })
-     // clear drink container of previous drinks
-     document.querySelector('#drink-container').innerHTML = ""
-     //iterate over new filtered array, calling generateDrink with each drink element
-     filteredDrinks.forEach(generateDrink)
-    }) 
-    
-    document.getElementById('target_div_1').innerHTML += 'Filter Drinks That Begin With:'
-        document.getElementById('target_div_1').style.color = 'yellow'
-        document.getElementById('target_div_1').style.fontSize = '22px'
-    
-    document.getElementById('target_div_2').innerHTML += 'OR:'
-        document.getElementById('target_div_2').style.color = 'yellow'
-        document.getElementById('target_div_2').style.fontSize = '22px'
 
-    document.getElementById('target_div_3').innerHTML += 'Click below to learn about our featured drinks or a surprise drink!'
-        document.getElementById('target_div_3').style.color = 'yellow'
-        document.getElementById('target_div_3').style.fontSize = '22px'
-        document.getElementById('target_div_1').style.fontWeight = '22px'
-})
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector("#random-drink-button").addEventListener('click', randomDrink)
+        document.querySelector("#featured-drink-button").addEventListener('click', getAllDrinks)
+        document.querySelector("#reset-button").addEventListener('click', resetPage)
+        document.querySelector("#drink-dropdown").addEventListener('change', filterDrinks) 
+        targetDiv() 
+    })
+
+    function targetDiv(){
+        document.getElementById('target_div_1').innerHTML += 'Filter Drinks That Begin With:'
+            document.getElementById('target_div_1').style.color = 'yellow'
+            document.getElementById('target_div_1').style.fontSize = '22px'
+        
+        document.getElementById('target_div_2').innerHTML += 'OR:'
+            document.getElementById('target_div_2').style.color = 'yellow'
+            document.getElementById('target_div_2').style.fontSize = '22px'
+
+        document.getElementById('target_div_3').innerHTML += 'Click below to learn about our featured drinks or a surprise drink!'
+            document.getElementById('target_div_3').style.color = 'yellow'
+            document.getElementById('target_div_3').style.fontSize = '22px'
+            document.getElementById('target_div_1').style.fontWeight = '22px'
+    }
 
 
 function getAllDrinks(){
@@ -55,29 +45,16 @@ function getAllDrinks(){
     document.body.style.backgroundSize = "1430px"
     document.body.style.backgroundRepeat = "repeat"
    
-    backButton.innerHTML="Previous"
-    document.querySelector('#drink-button').appendChild(backButton)
-    
-    
-    forwardButton.innerHTML="Next" 
-    document.querySelector('#drink-button').appendChild(forwardButton)
-
-    resetButton.innerHTML="Reset"
-    document.querySelector('#drink-button').appendChild(resetButton)
-    
-    backButton.addEventListener("click", previousPage)
-    forwardButton.addEventListener("click", nextPage)
-    resetButton.addEventListener("click", resetPage)
-    
     document.querySelector("#random-drink-button").style.visibility = "hidden"
     document.querySelector("#featured-drink-button").style.visibility = "hidden"
-    backButton.style.visibility = "hidden"
-
+    
     document.getElementById('target_div_2').style.visibility = "hidden" 
     document.getElementById('target_div_3').style.visibility = "hidden" 
+
+    previousButton()
+    nextButton()
     
 }
-
 
 function generateDrink(drink) {
     let drinkDiv = document.createElement('div')
@@ -121,6 +98,8 @@ function generateDrink(drink) {
     drinkDiv.appendChild(drinkBrew)
 }
 
+
+
 function randomDrink(){ 
     fetch('https://api.punkapi.com/v2/beers/random')
     .then(response => response.json())
@@ -138,19 +117,38 @@ function randomDrink(){
     document.body.style.backgroundSize = "1430px"
     document.body.style.backgroundRepeat = "repeat"
     
-    resetButton.innerHTML="Reset"
-    document.querySelector('#drink-button').appendChild(resetButton)
-
-    resetButton.addEventListener("click", resetPage)
-
 } 
+
+function filterDrinks(event) {
+    //get the value selected using the event object
+    let letter = event.target.value
+    //filter the allDrinks array using the selected value -  drink.name.startsWith(letter)
+    const filteredDrinks = allDrinks.filter((drink) => {
+        return drink.name.startsWith(letter)
+    })
+    // clear drink container of previous drinks
+    document.querySelector('#drink-container').innerHTML = ""
+    //iterate over new filtered array, calling generateDrink with each drink element
+    filteredDrinks.forEach(generateDrink)
+}
 
 function generateRandomDrink(random) {
     let randomDiv = document.createElement('div')
     document.querySelector('#random-container').appendChild(randomDiv)
 }
 
+function previousButton() {
+    backButton.innerHTML="Previous"
+    document.querySelector('#drink-button').appendChild(backButton)
+    backButton.addEventListener("click", previousPage)
+}
 
+
+function nextButton() {
+    forwardButton.innerHTML="Next" 
+    document.querySelector('#drink-button').appendChild(forwardButton)
+    forwardButton.addEventListener("click", nextPage)
+}
 
 
 function previousPage(e) {
@@ -161,7 +159,6 @@ function previousPage(e) {
             document.querySelector("#drink-container").innerHTML=""
             drinkArr.forEach(generateDrink)
         })  
-        backButton.style.visibility = "hidden"
     } 
     else {
         fetch(`https://api.punkapi.com/v2/beers?page=${pageNum-=1}&per_page=20`)
@@ -170,7 +167,8 @@ function previousPage(e) {
             document.querySelector("#drink-container").innerHTML=""
             drinkArr.forEach(generateDrink)
         })
-        forwardButton.style.visibility = "visible"  
+        previousButton();
+        nextButton();
    }  
 }
 
@@ -193,7 +191,34 @@ function nextPage(e) {
 }
 
 function resetPage(){ 
-   window.location.reload() 
+    if(((document.querySelector('#drink-container').innerHTML)!= "") || (document.querySelector('#random-container').innerHTML!= "") )
+    {
+        document.querySelector('#drink-container').innerHTML=""
+        document.querySelector('#random-container').innerHTML=""
+        document.getElementById('target_div_1').innerHTML=""
+        document.getElementById('target_div_2').innerHTML=""
+        document.getElementById('target_div_3').innerHTML=""
+
+        backButton.style.visibility = "hidden"
+        forwardButton.style.visibility = "hidden"
+    } 
+    refreshPage();  
+}
+
+function refreshPage(){
+        targetDiv(); 
+
+        document.querySelector("#random-drink-button").style.visibility = "visible"
+        document.querySelector("#featured-drink-button").style.visibility = "visible"
+
+        document.querySelector("#random-drink-button").addEventListener('click', randomDrink)
+        document.querySelector("#featured-drink-button").addEventListener('click', getAllDrinks)
+        document.querySelector("#reset-button").addEventListener('click', resetPage)
+        document.querySelector("#drink-dropdown").addEventListener('change', filterDrinks) 
+
+        backButton.style.visibility = "visible"
+        forwardButton.style.visibility = "visible"
+        
 }
 
 
