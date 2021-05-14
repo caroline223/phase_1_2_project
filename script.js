@@ -191,7 +191,7 @@ function nextPage(e) {
      backButton.style.visibility = "visible"     
 }
 
-function resetPage(e){ 
+function resetPage(){ 
 
         document.querySelector('#drink-container').innerHTML=""
         document.querySelector('#random-container').innerHTML=""
@@ -202,15 +202,13 @@ function resetPage(e){
         document.getElementById('target_div_1').style.visibility = "visible"
         document.getElementById('target_div_2').style.visibility = "visible" 
         document.getElementById('target_div_3').style.visibility = "visible" 
-
-        backButton.innerHTML=""
-        forwardButton.innerHTML=""
-        
-        backButton.style.visibility = "hidden"
-        forwardButton.style.visibility = "hidden"
-  
     
+        backButton.remove()
+        forwardButton.remove()
+       
 }
+
+
 
 
 
