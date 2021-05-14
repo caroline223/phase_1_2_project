@@ -19,11 +19,11 @@ document.addEventListener("DOMContentLoaded", function() {
 })
 
     function targetDiv(){
-        document.getElementById('target_div_1').innerHTML = 'Filter Drinks That Begin With:'
+        document.getElementById('target_div_1').innerHTML = 'Filter Featured Drinks That Begin With:'
             document.getElementById('target_div_1').style.color = 'yellow'
             document.getElementById('target_div_1').style.fontSize = '22px'
         
-        document.getElementById('target_div_2').innerHTML = 'OR:'
+        document.getElementById('target_div_2').innerHTML = 'Bonus:'
             document.getElementById('target_div_2').style.color = 'yellow'
             document.getElementById('target_div_2').style.fontSize = '22px'
 
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelector("#random-drink-button").style.visibility = "hidden"
         document.querySelector("#featured-drink-button").style.visibility = "hidden"
         
-        document.getElementById('target_div_2').style.visibility = "hidden" 
+        document.getElementById('target_div_2').style.visibility = "visible" 
         document.getElementById('target_div_3').style.visibility = "hidden" 
 
         previousButton()
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
             randomArr.map(generateRandomDrink)
         })    
         document.querySelector("#featured-drink-button").style.visibility = "hidden" 
-        document.getElementById('target_div_2').style.visibility = "hidden" 
+        document.getElementById('target_div_2').style.visibility = "visible" 
         document.getElementById('target_div_3').style.visibility = "hidden" 
 
         document.body.style.backgroundImage = "url('background_image.jpeg')"
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // clear drink container of previous drinks
         document.querySelector('#drink-container').innerHTML = ""
         //iterate over new filtered array, calling generateDrink with each drink element
-        filteredDrinks.forEach(generateDrink)
+        filteredDrinks.forEach(generateDrink)   
     }
 
     function generateRandomDrink(random) {
