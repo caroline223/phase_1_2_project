@@ -12,21 +12,22 @@ const forwardButton = document.createElement('button')
     document.addEventListener("DOMContentLoaded", function() {
         document.querySelector("#random-drink-button").addEventListener('click', randomDrink)
         document.querySelector("#featured-drink-button").addEventListener('click', getAllDrinks)
-        document.querySelector("#reset-button").addEventListener('click', resetPage)
         document.querySelector("#drink-dropdown").addEventListener('change', filterDrinks) 
+        document.querySelector("#reset-button").addEventListener('click', resetPage)
+        
         targetDiv() 
     })
 
     function targetDiv(){
-        document.getElementById('target_div_1').innerHTML += 'Filter Drinks That Begin With:'
+        document.getElementById('target_div_1').innerHTML = 'Filter Drinks That Begin With:'
             document.getElementById('target_div_1').style.color = 'yellow'
             document.getElementById('target_div_1').style.fontSize = '22px'
         
-        document.getElementById('target_div_2').innerHTML += 'OR:'
+        document.getElementById('target_div_2').innerHTML = 'OR:'
             document.getElementById('target_div_2').style.color = 'yellow'
             document.getElementById('target_div_2').style.fontSize = '22px'
 
-        document.getElementById('target_div_3').innerHTML += 'Click below to learn about our featured drinks or a surprise drink!'
+        document.getElementById('target_div_3').innerHTML = 'Click below to learn about our featured drinks or a surprise drink!'
             document.getElementById('target_div_3').style.color = 'yellow'
             document.getElementById('target_div_3').style.fontSize = '22px'
             document.getElementById('target_div_1').style.fontWeight = '22px'
@@ -190,35 +191,25 @@ function nextPage(e) {
      backButton.style.visibility = "visible"     
 }
 
-function resetPage(){ 
-    if(((document.querySelector('#drink-container').innerHTML)!= "") || (document.querySelector('#random-container').innerHTML!= "") )
-    {
+function resetPage(e){ 
+
         document.querySelector('#drink-container').innerHTML=""
         document.querySelector('#random-container').innerHTML=""
-        document.getElementById('target_div_1').innerHTML=""
-        document.getElementById('target_div_2').innerHTML=""
-        document.getElementById('target_div_3').innerHTML=""
-
-        backButton.style.visibility = "hidden"
-        forwardButton.style.visibility = "hidden"
-    } 
-    refreshPage();  
-}
-
-function refreshPage(){
-        targetDiv(); 
-
+        
         document.querySelector("#random-drink-button").style.visibility = "visible"
         document.querySelector("#featured-drink-button").style.visibility = "visible"
 
-        document.querySelector("#random-drink-button").addEventListener('click', randomDrink)
-        document.querySelector("#featured-drink-button").addEventListener('click', getAllDrinks)
-        document.querySelector("#reset-button").addEventListener('click', resetPage)
-        document.querySelector("#drink-dropdown").addEventListener('change', filterDrinks) 
+        document.getElementById('target_div_1').style.visibility = "visible"
+        document.getElementById('target_div_2').style.visibility = "visible" 
+        document.getElementById('target_div_3').style.visibility = "visible" 
 
-        backButton.style.visibility = "visible"
-        forwardButton.style.visibility = "visible"
+        backButton.innerHTML=""
+        forwardButton.innerHTML=""
         
+        backButton.style.visibility = "hidden"
+        forwardButton.style.visibility = "hidden"
+  
+    
 }
 
 
