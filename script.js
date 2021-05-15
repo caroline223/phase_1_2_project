@@ -7,11 +7,6 @@ const backButton = document.createElement('button')
 const forwardButton = document.createElement('button')
 
 
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#random-drink-button").addEventListener('click', randomDrink)
     document.querySelector("#featured-drink-button").addEventListener('click', getAllDrinks)
@@ -213,7 +208,7 @@ function resetPage(){
         document.querySelector("#featured-drink-button").style.visibility = "visible"
 
         document.querySelector("#drink-dropdown").style.visibility = "hidden"
-        
+
         document.getElementById('target_div_1').style.visibility = "hidden"
         document.getElementById('target_div_2').style.visibility = "hidden" 
         document.getElementById('target_div_3').style.visibility = "visible" 
