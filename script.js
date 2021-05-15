@@ -9,30 +9,25 @@ const forwardButton = document.createElement('button')
 
 
 
+
+
+
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#random-drink-button").addEventListener('click', randomDrink)
     document.querySelector("#featured-drink-button").addEventListener('click', getAllDrinks)
     document.querySelector("#drink-dropdown").addEventListener('change', filterDrinks) 
     document.querySelector("#reset-button").addEventListener('click', resetPage)
-        
-    targetDiv() 
+     
+    document.getElementById('target_div_3').innerHTML = 'Click below to learn about our featured drinks or a surprise drink!'
+    document.getElementById('target_div_3').style.color = 'yellow'
+    document.getElementById('target_div_3').style.fontSize = '22px'
+    document.getElementById('target_div_1').style.fontWeight = '22px'
+
+    document.querySelector("#drink-dropdown").style.visibility = "hidden" 
+    
 })
 
-    function targetDiv(){
-        document.getElementById('target_div_1').innerHTML = 'Filter Featured Drinks That Begin With:'
-            document.getElementById('target_div_1').style.color = 'yellow'
-            document.getElementById('target_div_1').style.fontSize = '22px'
-        
-        document.getElementById('target_div_2').innerHTML = 'Bonus:'
-            document.getElementById('target_div_2').style.color = 'yellow'
-            document.getElementById('target_div_2').style.fontSize = '22px'
-
-        document.getElementById('target_div_3').innerHTML = 'Click below to learn about our featured drinks or a surprise drink!'
-            document.getElementById('target_div_3').style.color = 'yellow'
-            document.getElementById('target_div_3').style.fontSize = '22px'
-            document.getElementById('target_div_1').style.fontWeight = '22px'
-    }
-
+    
 
     function getAllDrinks(){
         fetch(pageURL)
@@ -49,7 +44,17 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelector("#random-drink-button").style.visibility = "hidden"
         document.querySelector("#featured-drink-button").style.visibility = "hidden"
         
-        document.getElementById('target_div_2').style.visibility = "visible" 
+        document.getElementById('target_div_2').innerHTML = "Bonus:" 
+            document.getElementById('target_div_2').style.color = 'yellow'
+            document.getElementById('target_div_2').style.fontSize = '22px'
+            document.getElementById('target_div_2').style.visibility = "visible"
+        
+        document.getElementById('target_div_1').innerHTML= "Filter Featured Drinks That Begin With:" 
+            document.getElementById('target_div_1').style.color = 'yellow'
+            document.getElementById('target_div_1').style.fontSize = '22px'
+            document.getElementById('target_div_1').style.visibility = "visible"
+        
+       
         document.getElementById('target_div_3').style.visibility = "hidden" 
 
         previousButton()
@@ -60,6 +65,8 @@ document.addEventListener("DOMContentLoaded", function() {
     function generateDrink(drink) {
         let drinkDiv = document.createElement('div')
         document.querySelector('#drink-container').appendChild(drinkDiv)
+
+        document.querySelector("#drink-dropdown").style.visibility = "visible"
         
         //drink's name
         drinkName = document.createElement('h3')
@@ -111,31 +118,36 @@ document.addEventListener("DOMContentLoaded", function() {
             randomArr.map(generateRandomDrink)
         })    
         document.querySelector("#featured-drink-button").style.visibility = "hidden" 
-        document.getElementById('target_div_2').style.visibility = "visible" 
+        document.getElementById('target_div_2').style.visibility = "hidden" 
         document.getElementById('target_div_3').style.visibility = "hidden" 
 
         document.body.style.backgroundImage = "url('background_image.jpeg')"
         document.body.style.backgroundSize = "1430px"
         document.body.style.backgroundRepeat = "repeat"
-        
+
     } 
 
     function filterDrinks(event) {
-        //get the value selected using the event object
-        let letter = event.target.value
-        //filter the allDrinks array using the selected value -  drink.name.startsWith(letter)
-        const filteredDrinks = allDrinks.filter((drink) => {
-            return drink.name.startsWith(letter)
-        })
-        // clear drink container of previous drinks
-        document.querySelector('#drink-container').innerHTML = ""
-        //iterate over new filtered array, calling generateDrink with each drink element
-        filteredDrinks.forEach(generateDrink)   
+
+       //get the value selected using the event object
+       let letter = event.target.value
+       //filter the allDrinks array using the selected value -  drink.name.startsWith(letter)
+       const filteredDrinks = allDrinks.filter((drink) => {
+           return drink.name.startsWith(letter)
+       })
+       // clear drink container of previous drinks
+       document.querySelector('#drink-container').innerHTML = ""
+       //iterate over new filtered array, calling generateDrink with each drink element
+       filteredDrinks.forEach(generateDrink)   
+
     }
 
     function generateRandomDrink(random) {
         let randomDiv = document.createElement('div')
         document.querySelector('#random-container').appendChild(randomDiv)
+
+        document.querySelector("#drink-dropdown").style.visibility = "hidden"
+
     }
 
     function previousButton() {
@@ -200,8 +212,10 @@ function resetPage(){
         document.querySelector("#random-drink-button").style.visibility = "visible"
         document.querySelector("#featured-drink-button").style.visibility = "visible"
 
-        document.getElementById('target_div_1').style.visibility = "visible"
-        document.getElementById('target_div_2').style.visibility = "visible" 
+        document.querySelector("#drink-dropdown").style.visibility = "hidden"
+        
+        document.getElementById('target_div_1').style.visibility = "hidden"
+        document.getElementById('target_div_2').style.visibility = "hidden" 
         document.getElementById('target_div_3').style.visibility = "visible" 
     
         backButton.remove()
