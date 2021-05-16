@@ -1,8 +1,10 @@
-As a user, I want to see a list of drinks that are most popular 
-As a user, I want to to see a list of beers based on a search parameter by name 
-As a user, I want to see a random drink appear as the featured drink of the day
+As a user, I want to see a list of drinks that are presented by the given API. 
 
-As a user, I want to click a reset button to undo the filter or clear the search bar when searching for ingredients 
+As a user, I want to to see a list of beers based on a filter parameter by letter. 
+
+As a user, I want to see a random drink appear as a featured drink. 
+
+As a user, I want to click a reset button to undo the filter or clear the filter when viewing the drinks.  
 
 MVP
 - DOMContentLoaded event listener that will make a fetch request on different beers, including name, description, date brewed, tagline and image
