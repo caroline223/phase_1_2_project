@@ -39,12 +39,14 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelector("#random-drink-button").style.visibility = "hidden"
         document.querySelector("#featured-drink-button").style.visibility = "hidden"
         
-        document.getElementById('target_div_2').innerHTML = "Bonus:" 
+        document.getElementById('target_div_2').innerHTML = "Bonus Feature:" 
+            document.getElementById('target_div_2').style.fontFamily = "cursive"
             document.getElementById('target_div_2').style.color = 'yellow'
             document.getElementById('target_div_2').style.fontSize = '22px'
             document.getElementById('target_div_2').style.visibility = "visible"
         
         document.getElementById('target_div_1').innerHTML= "Filter Featured Drinks That Begin With:" 
+            document.getElementById('target_div_1').style.fontFamily = "cursive"
             document.getElementById('target_div_1').style.color = 'yellow'
             document.getElementById('target_div_1').style.fontSize = '22px'
             document.getElementById('target_div_1').style.visibility = "visible"
@@ -147,6 +149,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function previousButton() {
         backButton.innerHTML="Previous"
+        backButton.style.backgroundColor = "yellow"
+        backButton.style.borderRadius = "12px"
+        backButton.style.padding = "5px"
+        backButton.style.fontFamily= "cursive"
         document.querySelector('#drink-button').appendChild(backButton)
         backButton.addEventListener("click", previousPage)
     }
@@ -154,6 +160,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function nextButton() {
         forwardButton.innerHTML="Next" 
+        forwardButton.style.backgroundColor = "yellow"
+        forwardButton.style.borderRadius = "12px"
+        forwardButton.style.padding = "5px"
+        forwardButton.style.fontFamily= "cursive"
         document.querySelector('#drink-button').appendChild(forwardButton)
         forwardButton.addEventListener("click", nextPage)
     }
