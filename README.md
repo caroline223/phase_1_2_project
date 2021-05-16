@@ -12,4 +12,5 @@ All content published by Bottom's Up is the property of Bottom's Up and is prote
 
 For better insight on how to use my app, see my video walkthrough! Enjoy!
 
-Video link:
+Video link: https://youtu.be/CjQUQ6VrzZY
+
