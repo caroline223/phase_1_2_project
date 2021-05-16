@@ -137,6 +137,8 @@ document.addEventListener("DOMContentLoaded", function() {
        //iterate over new filtered array, calling generateDrink with each drink element
        filteredDrinks.forEach(generateDrink)   
 
+       backButton.remove()
+       forwardButton.remove()
     }
 
     function generateRandomDrink(random) {
