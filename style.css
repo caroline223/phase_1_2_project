@@ -26,14 +26,24 @@ p {
 
 #random-drink-button{
     padding: 5px;
+    background-color: yellow;
+    font-family: cursive;
+    border-radius: 12px;
+    
 }
 
 #featured-drink-button{
     padding: 5px;
+    background-color: yellow;
+    font-family: cursive;
+    border-radius: 12px;
 }
 
 #reset-button{
     padding: 5px;
+    background-color: yellow;
+    font-family: cursive;
+    border-radius: 12px;
 }
 
 
