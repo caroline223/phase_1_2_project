@@ -103,6 +103,22 @@ document.addEventListener("DOMContentLoaded", function() {
         drinkDiv.appendChild(drinkBrew)
     }
 
+    function filterDrinks(event) {
+
+        //get the value selected using the event object
+        let letter = event.target.value
+        //filter the allDrinks array using the selected value -  drink.name.startsWith(letter)
+        const filteredDrinks = allDrinks.filter((drink) => {
+            return drink.name.startsWith(letter)
+        })
+        // clear drink container of previous drinks
+        document.querySelector('#drink-container').innerHTML = ""
+        //iterate over new filtered array, calling generateDrink with each drink element
+        filteredDrinks.forEach(generateDrink)   
+ 
+        backButton.remove()
+        forwardButton.remove()
+     }
 
 
     function randomDrink(){ 
@@ -124,23 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     } 
 
-    function filterDrinks(event) {
-
-       //get the value selected using the event object
-       let letter = event.target.value
-       //filter the allDrinks array using the selected value -  drink.name.startsWith(letter)
-       const filteredDrinks = allDrinks.filter((drink) => {
-           return drink.name.startsWith(letter)
-       })
-       // clear drink container of previous drinks
-       document.querySelector('#drink-container').innerHTML = ""
-       //iterate over new filtered array, calling generateDrink with each drink element
-       filteredDrinks.forEach(generateDrink)   
-
-       backButton.remove()
-       forwardButton.remove()
-    }
-
+    
     function generateRandomDrink(random) {
         let randomDiv = document.createElement('div')
         document.querySelector('#random-container').appendChild(randomDiv)
